@@ -12,15 +12,12 @@ last_month_profit = 0
 changes = []
 month_changes = []
 
-print(csvpath)
-
 # Open/read CSV file using UTF-8 encoding
 with open(csvpath, encoding='UTF-8') as csvfile:
     csvreader = csv.reader(csvfile, delimiter=",")
 
     # Read csv header
     csv_header = next(csvreader)
-    print(f"CSV Header: {csv_header}")
 
     # Loop through csv file
     for row in csvreader:
@@ -59,15 +56,19 @@ with open(csvpath, encoding='UTF-8') as csvfile:
 
     # Output analysis
     output = f"""Financial Analysis
-    --------------------------------------------
-    Total Months: {month_count}
-    Total: ${total_profit}
-    Average Change: ${round(avg_change, 2)}
-    Greatest Increase in Profits: {max_month}
-    Greatest Decrease in Profits: {min_month}"""
+--------------------------------------------
+Total Months: {month_count}
+Total: ${total_profit}
+Average Change: ${round(avg_change, 2)}
+Greatest Increase in Profits: {max_month} (${max_change})
+Greatest Decrease in Profits: {min_month} (${min_change})"""
 
+    # Print output
     print(output)
 
+    # Export analysis output to text file
+    with(open("pybank_output.txt", 'w') as f):
+        f.write(output)
         
 
 
